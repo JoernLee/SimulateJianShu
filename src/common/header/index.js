@@ -1,10 +1,47 @@
 import React, {Component} from 'react';
-import {HeaderWrapper, Logo, Nav, NavItem, NavSearch, Addition, Button, SearchWrapper} from "./styles";
+import {
+    HeaderWrapper,
+    Logo,
+    Nav,
+    NavItem,
+    NavSearch,
+    Addition,
+    Button,
+    SearchWrapper,
+    SearchInfo,
+    SearchInfoTitle, SearchInfoSwitch, SearchInfoItem, SearchInfoList
+} from "./styles";
 import {CSSTransition} from 'react-transition-group';
 import {connect} from 'react-redux';
 import {actionCreators} from './store/index';
 
+
 class Header extends Component {
+
+    getListArea(show) {
+        if (show) {
+            return (
+                <SearchInfo>
+                    <SearchInfoTitle>
+                        热门搜索
+                        <SearchInfoSwitch>
+                            换一批
+                        </SearchInfoSwitch>
+                    </SearchInfoTitle>
+                    <SearchInfoList>
+                        <SearchInfoItem>教育</SearchInfoItem>
+                        <SearchInfoItem>教育</SearchInfoItem>
+                        <SearchInfoItem>教育</SearchInfoItem>
+                        <SearchInfoItem>教育</SearchInfoItem>
+                        <SearchInfoItem>教育</SearchInfoItem>
+                        <SearchInfoItem>教育</SearchInfoItem>
+                    </SearchInfoList>
+                </SearchInfo>
+            )
+        } else {
+            return null;
+        }
+    };
 
     render() {
         const {focused, handleInputFocus, handleInputBlur} = this.props;
@@ -32,6 +69,7 @@ class Header extends Component {
                             </NavSearch>
                         </CSSTransition>
                         <i className={focused ? 'focused iconfont' : 'iconfont'}>&#xe617;</i>
+                        {this.getListArea(focused)}
                     </SearchWrapper>
                 </Nav>
                 <Addition>
@@ -49,7 +87,8 @@ class Header extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        focused: state.header.focused
+        // focused: state.get('header').get('focused')
+        focused: state.getIn(['header', 'focused'])
     }
 };
 
