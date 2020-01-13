@@ -1,4 +1,4 @@
-import React, {Fragment} from 'react';
+import React from 'react';
 import Header from "./common/header";
 import {Provider} from 'react-redux';
 import {GlobalIconfont} from "./statics/iconfont/iconfont";

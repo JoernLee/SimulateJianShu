@@ -29,12 +29,9 @@ class Header extends Component {
                         </SearchInfoSwitch>
                     </SearchInfoTitle>
                     <SearchInfoList>
-                        <SearchInfoItem>教育</SearchInfoItem>
-                        <SearchInfoItem>教育</SearchInfoItem>
-                        <SearchInfoItem>教育</SearchInfoItem>
-                        <SearchInfoItem>教育</SearchInfoItem>
-                        <SearchInfoItem>教育</SearchInfoItem>
-                        <SearchInfoItem>教育</SearchInfoItem>
+                        {this.props.list.map((item)=>{
+                            return <SearchInfoItem key={item}>{item}</SearchInfoItem>
+                        })}
                     </SearchInfoList>
                 </SearchInfo>
             )
@@ -88,13 +85,15 @@ class Header extends Component {
 const mapStateToProps = (state) => {
     return {
         // focused: state.get('header').get('focused')
-        focused: state.getIn(['header', 'focused'])
+        focused: state.getIn(['header', 'focused']),
+        list:state.getIn(['header','list'])
     }
 };
 
 const mapDispatchToProps = (dispatch) => {
     return {
         handleInputFocus() {
+            dispatch(actionCreators.getList());
             dispatch(actionCreators.searchFocus());
         },
         handleInputBlur() {
