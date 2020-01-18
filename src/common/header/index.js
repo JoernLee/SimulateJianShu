@@ -22,7 +22,7 @@ class Header extends Component {
         const {focused, mouseIn, list, page, totalPage, handleMouseEnter, handleMouseLeave, handleChangePage} = this.props;
         const newList = list.toJS();
         const pageList = [];
-        if (newList.length){
+        if (newList.length) {
             for (let i = (page - 1) * 10; i < page * 10; i++) {
                 pageList.push(
                     //List是immutable类型，所以需要进行上面的toJS转换为普通数组
@@ -35,8 +35,10 @@ class Header extends Component {
                 <SearchInfo onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
                     <SearchInfoTitle>
                         热门搜索
-                        <SearchInfoSwitch onClick={() => handleChangePage(page, totalPage)}>
-                            换一批
+                        <SearchInfoSwitch onClick={() => handleChangePage(page, totalPage, this.spinIcon)}>
+                            <i ref={(icon) => {
+                                this.spinIcon = icon
+                            }} className='iconfont spin'>&#xe851;</i>换一批
                         </SearchInfoSwitch>
                     </SearchInfoTitle>
                     <SearchInfoList>
@@ -50,7 +52,7 @@ class Header extends Component {
     };
 
     render() {
-        const {focused, handleInputFocus, handleInputBlur} = this.props;
+        const {focused, handleInputFocus, handleInputBlur, list} = this.props;
         return (
             <HeaderWrapper>
                 <Logo/>
@@ -69,12 +71,12 @@ class Header extends Component {
                         >
                             <NavSearch
                                 className={focused ? 'focused' : ''}
-                                onFocus={handleInputFocus}
+                                onFocus={() => handleInputFocus(list)}
                                 onBlur={handleInputBlur}
                             >
                             </NavSearch>
                         </CSSTransition>
-                        <i className={focused ? 'focused iconfont' : 'iconfont'}>&#xe617;</i>
+                        <i className={focused ? 'focused iconfont zoom' : 'iconfont zoom'}>&#xe617;</i>
                         {this.getListArea()}
                     </SearchWrapper>
                 </Nav>
@@ -104,8 +106,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        handleInputFocus() {
-            dispatch(actionCreators.getList());
+        handleInputFocus(list) {
+            (list.size === 0) && dispatch(actionCreators.getList());
             dispatch(actionCreators.searchFocus());
         },
         handleInputBlur() {
@@ -117,7 +119,15 @@ const mapDispatchToProps = (dispatch) => {
         handleMouseLeave() {
             dispatch(actionCreators.mouseLeave());
         },
-        handleChangePage(page, totalPage) {
+        handleChangePage(page, totalPage, spin) {
+            //通过正则把字符串中不是数字的内容都替换为空
+            let originalAngle = spin.style.transform.replace(/[^0-9]/ig, '');
+            if (originalAngle) {
+                originalAngle = parseInt(originalAngle, 10);
+            } else {
+                originalAngle = 0;
+            }
+            spin.style.transform = 'rotate(' + (originalAngle + 360) + 'deg';
             if (page < totalPage) {
                 dispatch(actionCreators.changePage(page + 1));
             } else {
