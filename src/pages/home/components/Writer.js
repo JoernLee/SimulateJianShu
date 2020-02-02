@@ -1,11 +1,10 @@
 import React, {Component} from 'react';
 
-class Home extends Component{
+class Writer extends Component{
     render(){
         return (
-            <div>Home2</div>
+            <div>Writer</div>
         );
     }
 }
-
-export default Home;
+export default Writer;

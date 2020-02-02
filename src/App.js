@@ -5,8 +5,8 @@ import {GlobalIconfont} from "./statics/iconfont/iconfont";
 import {GlobalBody} from "./styles";
 import store from "./store";
 import {BrowserRouter,Route} from 'react-router-dom';
-import Home from "./common/home";
-import Detail from "./common/detail";
+import Home from "./pages/home";
+import Detail from "./pages/detail";
 
 function App() {
   return (
