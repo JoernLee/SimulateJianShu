@@ -11,13 +11,14 @@ class Home extends Component {
       <HomeWrapper>
         <HomeLeft>
           <img className='banner-img'
-               src='https://upload-images.jianshu.io/upload_images/13448242-20871e9f865fb242.jpg?imageMogr2/auto-orient/strip|imageView2/2/w/594/format/webp'/>
+               src='https://upload-images.jianshu.io/upload_images/13448242-20871e9f865fb242.jpg?imageMogr2/auto-orient/strip|imageView2/2/w/594/format/webp'
+               alt=''/>
           <Topic/>
           <List/>
         </HomeLeft>
         <HomeRight>
-            <Recommend/>
-            <Writer/>
+          <Recommend/>
+          <Writer/>
         </HomeRight>
       </HomeWrapper>
     );
