@@ -1,5 +1,4 @@
 import {fromJS} from 'immutable';
-import {ListInfo, ListItem} from "../style";
 
 const defaultState = fromJS({
    topicList: [{
@@ -30,7 +29,5 @@ const defaultState = fromJS({
 });
 
 export default (state = defaultState, action) => {
-
-
     return state;
 }
