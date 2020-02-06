@@ -8,7 +8,7 @@ export const HeaderWrapper = styled.div`
 `;
 
 export const Logo = styled.a.attrs({
-    href: '/'
+  href: '/'
 })`
     position:absolute;
     top:0;
@@ -65,7 +65,7 @@ export const SearchWrapper = styled.div`
 `;
 
 export const NavSearch = styled.input.attrs({
-    placeholder: '搜索'
+  placeholder: '搜索'
 })`
     width:160px;
     height:38px;
@@ -100,13 +100,14 @@ export const NavSearch = styled.input.attrs({
     }
 `;
 
-export const  SearchInfo = styled.div`
+export const SearchInfo = styled.div`
     position:absolute;
     left:0;
     top:56px;
     width:240px;
     padding:0 20px;
-    box-shadow:0 0 8px rgba(0,0,0,.2)
+    box-shadow:0 0 8px rgba(0,0,0,.2);
+    background:#fff;
 `;
 
 export const SearchInfoTitle = styled.div`
