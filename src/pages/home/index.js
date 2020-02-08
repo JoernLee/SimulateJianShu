@@ -1,9 +1,11 @@
 import React, {Component} from 'react';
+import {connect} from 'react-redux';
 import {HomeLeft, HomeRight, HomeWrapper} from "./style";
 import Topic from "./components/Topic";
 import List from "./components/List";
 import Recommend from "./components/Recommend";
 import Writer from "./components/Writer";
+import * as actionCreators from "./store/actionCreators";
 
 class Home extends Component {
   render() {
@@ -23,6 +25,29 @@ class Home extends Component {
       </HomeWrapper>
     );
   }
+
+  componentDidMount() {
+    this.props.changeHomeData();
+    //UI组件发送Ajax请求是不合适的
+    /* axios.get('/api/home.json').then((res) => {
+       const result = res.data.data;
+       //创建Action修改Store数据
+       const action = {
+         type: 'change_home_data',
+         topicList: result.topicList,
+         articleList: result.articleList,
+         recommendList: result.recommendList
+       };
+       this.props.changeHomeData(action);
+     })*/
+  }
 }
 
-export default Home;
+const mapDispatchToProps = (dispatch) => ({
+  changeHomeData() {
+    const action = actionCreators.getHomeInfo();
+    dispatch(action);
+  }
+});
+
+export default connect(null, mapDispatchToProps)(Home);
