@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, {PureComponent} from 'react';
 import {connect} from 'react-redux';
 import {BackTop, HomeLeft, HomeRight, HomeWrapper} from "./style";
 import Topic from "./components/Topic";
@@ -6,8 +6,8 @@ import List from "./components/List";
 import Recommend from "./components/Recommend";
 import Writer from "./components/Writer";
 import * as actionCreators from "./store/actionCreators";
-
-class Home extends Component {
+//PureComponent底层实现了一个shouldComponentUpdate，避免没必要的渲染
+class Home extends PureComponent {
 
   //UI组件也可以有少量逻辑
   handleScrollTop() {
