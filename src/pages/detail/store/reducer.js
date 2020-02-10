@@ -1,4 +1,5 @@
 import {fromJS} from 'immutable';
+import {constants} from "./index";
 
 const defaultState = fromJS({
   title:'若是余生绵长，却只留她一人寂寥，那该有多残忍。',
@@ -12,7 +13,11 @@ const defaultState = fromJS({
 
 export default (state = defaultState, action) => {
   switch (action.type) {
-
+    case constants.CHANGE_DETAIL:
+      return state.merge({
+        title: action.title,
+        content:action.content
+      });
     default: {
       return state;
     }
