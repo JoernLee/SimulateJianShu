@@ -1,22 +1,21 @@
 import React, {PureComponent} from 'react';
 import {Content, DetailWrapper, Header} from "./styled";
+import {connect} from 'react-redux';
 
 class Detail extends PureComponent {
   render() {
     return (
       <DetailWrapper>
-        <Header>若是余生绵长，却只留她一人寂寥，那该有多残忍。</Header>
-        <Content>
-          <img
-            src='http://upload-images.jianshu.io/upload_images/8202513-00d6c528c21e09be.png?imageMogr2/auto-orient/strip|imageView2/2/w/658/format/webp'/>
-          <p>柳公子听了她的话，深情款款道：“可否换我来照顾你？”</p>
-          <p>柳公子听了她的话，深情款款道：“可否换我来照顾你？”</p>
-          <p>柳公子听了她的话，深情款款道：“可否换我来照顾你？”</p>
-          <p>柳公子听了她的话，深情款款道：“可否换我来照顾你？”</p>
-        </Content>
+        <Header>{this.props.title}</Header>
+        <Content dangerouslySetInnerHTML={{__html: this.props.content}}/>
       </DetailWrapper>
     );
   }
 }
 
-export default Detail;
+const mapStateToProps = (state) => ({
+  title: state.getIn(['detail', 'title']),
+  content: state.getIn(['detail', 'content'])
+});
+
+export default connect(mapStateToProps, null)(Detail);
