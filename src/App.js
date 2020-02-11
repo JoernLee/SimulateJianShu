@@ -16,7 +16,8 @@ function App() {
           <div>
             <Header/>
             <Route path='/' exact component={Home}></Route>
-            <Route path='/detail' exact component={Detail}></Route>
+            {/*添加:id，访问detail下要求传递一个id参数，后面link跳转时候进行拼接*/}
+            <Route path='/detail/:id' exact component={Detail}></Route>
           </div>
         </BrowserRouter>
         <GlobalIconfont/>
