@@ -1,5 +1,6 @@
 import React, {PureComponent} from 'react';
 import {Content, DetailWrapper, Header} from "./styled";
+import {withRouter} from 'react-router-dom';
 import {connect} from 'react-redux';
 import {actionCreators} from "./store";
 
@@ -29,4 +30,5 @@ const mapDispatchToProps = (dispatch) => ({
   }
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Detail);
+//让Detail即便是异步组件也有有能力获取router的内容
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Detail));
